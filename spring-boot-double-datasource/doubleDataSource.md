@@ -8,4 +8,4 @@
 4. 编写数据库对应表的dao，entity，mapper等信息，可借助插件生成，如：easyCode，**请留意mapper类和xml的目录结构**
 5. 编写Controller测试，访问：http://localhost:8080/test 查看结果
 
-注：具体代码请下载查询
+注：[具体代码请下载demo查看](https://github.com/Coder-LiangShan/spring-boot-demos.git)
