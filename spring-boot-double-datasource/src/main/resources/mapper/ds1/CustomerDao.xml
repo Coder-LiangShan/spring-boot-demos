@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.liangshan.doubledatasource.dao.ds1.CustomerDao">
+
+    <resultMap type="pers.liangshan.doubledatasource.entity.Customer" id="CustomerMap">
+        <result property="customerId" column="customer_id" jdbcType="INTEGER"/>
+        <result property="customerName" column="customer_name" jdbcType="VARCHAR"/>
+        <result property="customerAge" column="customer_age" jdbcType="VARCHAR"/>
+        <result property="insertTime" column="insert_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="CustomerMap">
+        select
+          customer_id, customer_name, customer_age, insert_time, update_time
+        from db1.customer
+        where customer_id = #{customerId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="CustomerMap">
+        select
+          customer_id, customer_name, customer_age, insert_time, update_time
+        from db1.customer
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="CustomerMap">
+        select
+          customer_id, customer_name, customer_age, insert_time, update_time
+        from db1.customer
+        <where>
+            <if test="customerId != null">
+                and customer_id = #{customerId}
+            </if>
+            <if test="customerName != null and customerName != ''">
+                and customer_name = #{customerName}
+            </if>
+            <if test="customerAge != null and customerAge != ''">
+                and customer_age = #{customerAge}
+            </if>
+            <if test="insertTime != null">
+                and insert_time = #{insertTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="customerId" useGeneratedKeys="true">
+        insert into db1.customer(customer_name, customer_age, insert_time, update_time)
+        values (#{customerName}, #{customerAge}, #{insertTime}, #{updateTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db1.customer
+        <set>
+            <if test="customerName != null and customerName != ''">
+                customer_name = #{customerName},
+            </if>
+            <if test="customerAge != null and customerAge != ''">
+                customer_age = #{customerAge},
+            </if>
+            <if test="insertTime != null">
+                insert_time = #{insertTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where customer_id = #{customerId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from db1.customer where customer_id = #{customerId}
+    </delete>
+
+</mapper>
