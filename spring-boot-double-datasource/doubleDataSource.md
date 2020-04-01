@@ -1,4 +1,4 @@
-## double-datasource
+## 双数据源配置
 > 做项目需要配置双数据源，查阅资料后，顺利完成双数据源的配置，现整理成demo。
 
 **具体步骤：**
@@ -8,4 +8,4 @@
 4. 编写数据库对应表的dao，entity，mapper等信息，可借助插件生成，如：easyCode，**请留意mapper类和xml的目录结构**
 5. 编写Controller测试，访问：http://localhost:8080/test 查看结果
 
-注：[具体代码请下载demo查看](https://github.com/Coder-LiangShan/spring-boot-demos.git)
+注：[示例代码请下载demo查看](https://github.com/Coder-LiangShan/spring-boot-demos.git)
